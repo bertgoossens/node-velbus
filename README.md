@@ -1,19 +1,68 @@
 # node-velbus
 
-1. install node
+## Installation on raspberry Pi
 
-2. npm install
+### Install node
 
-3. grunt default
+```sh
+curl -sLS https://apt.adafruit.com/add | sudo bash
 
-# Installation on raspberry Pi
+```sh
+sudo apt-get install node
 
-1. Install velserver from jeroends (http://leachy.homeip.net/velbus/velserv.c) (http://forum.velleman.eu/viewtopic.php?f=26&t=3935)
+```sh
+Install websocket module
 
-5. Install apache server.  And upload src/client.js, index.html and style folder to the www directory.
+```sh
+sudo npm install -g nodejs-websocket
+sudo npm link nodejs-websocket
 
-6. Install node in home folder. And upload node.js and velbus-socket.js.  
+Place src/node.js and src/velbus-socket.js in the home/pi directory
 
-7. Change the IP in client.js and velbus-socket.js
+Start nodeserver on startup
 
-8. Run the node server node node.js
+Open and add the velserv command to the file /etc/rc.local before the exit line
+
+```sh
+su pi -c 'node /home/pi/node.js < /dev/null &'
+
+### Install velserver
+
+(http://leachy.homeip.net/velbus/velserv.c) (http://forum.velleman.eu/viewtopic.php?f=26&t=3935)
+
+Download file
+```sh
+cd ~
+
+```sh
+wget http://leachy.homeip.net/velbus/velserv.c
+
+Install
+```sh
+gcc -o velserv velserv.c -lpthread
+
+And test..
+```sh
+/home/pi/velserv -v -v -v -v
+
+Start velserver on startup
+
+Open and add the velserv command to the file /etc/rc.local before the exit line
+
+```sh
+sudo nano /etc/rc.local
+
+```sh
+/home/pi/velserv -v  -v -v -v
+
+### Install apache on raspberry
+
+```sh
+sudo apt-get install apache2 -y
+
+Move index.html, style folder and src/client.js to the apache home directory
+
+
+Browse to pi IP address.
+
+
