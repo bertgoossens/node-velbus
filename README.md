@@ -5,26 +5,25 @@
 ### Install node
 
 ```sh
-curl -sLS https://apt.adafruit.com/add | sudo bash
+$ curl -sLS https://apt.adafruit.com/add | sudo bash
+$ sudo apt-get install node
+```
 
-```sh
-sudo apt-get install node
-
-```sh
 Install websocket module
 
 ```sh
-sudo npm install -g nodejs-websocket
-sudo npm link nodejs-websocket
+$ sudo npm install -g nodejs-websocket
+$ sudo npm link nodejs-websocket
+```
 
 Place src/node.js and src/velbus-socket.js in the home/pi directory
-
 Start nodeserver on startup
 
 Open and add the velserv command to the file /etc/rc.local before the exit line
 
 ```sh
-su pi -c 'node /home/pi/node.js < /dev/null &'
+$ su pi -c 'node /home/pi/node.js < /dev/null &'
+```
 
 ### Install velserver
 
@@ -33,17 +32,14 @@ su pi -c 'node /home/pi/node.js < /dev/null &'
 Download file
 ```sh
 cd ~
-
-```sh
 wget http://leachy.homeip.net/velbus/velserv.c
-
-Install
-```sh
 gcc -o velserv velserv.c -lpthread
+```
 
 And test..
 ```sh
 /home/pi/velserv -v -v -v -v
+```
 
 Start velserver on startup
 
@@ -51,14 +47,17 @@ Open and add the velserv command to the file /etc/rc.local before the exit line
 
 ```sh
 sudo nano /etc/rc.local
+```
 
 ```sh
 /home/pi/velserv -v  -v -v -v
+```
 
 ### Install apache on raspberry
 
 ```sh
 sudo apt-get install apache2 -y
+```
 
 Move index.html, style folder and src/client.js to the apache home directory
 
